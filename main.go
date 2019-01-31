@@ -39,7 +39,7 @@ var (
 )
 
 // ReadFlags reads the flags into global variables.
-func ReadFlags() {
+func ReadFlags() bool {
 	// Just for debugging.
 	log.Println("Reading flags!")
 
@@ -51,6 +51,13 @@ func ReadFlags() {
 	flag.IntVar(&SecondTimeout, "timeout", 30, "How long the HTTP client's timeout should be in seconds.")  // Example: "-timeout 30".
 	flag.BoolVar(&CleanProxies, "clean", false, "Whether we should clean the proxy list of dead proxies.")  // Example: "-clean false".
 	flag.Parse()
+
+	if Poll == "" || Options == "" {
+		log.Println("You must include the -poll and -options flags, if you don't understand how to use this please check the documentation at: github.com/VolticFroogo/Strawpoll-Bot")
+		return false
+	}
+
+	return true
 }
 
 // ReadProxyList reads the proxy list file to the ProxyList string array and returns any errors.
@@ -145,7 +152,9 @@ func PostThread() {
 }
 
 func main() {
-	ReadFlags()
+	if !ReadFlags() {
+		return
+	}
 
 	// Read the proxy list into the ProxyList array.
 	err := ReadProxyList()
