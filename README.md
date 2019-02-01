@@ -68,7 +68,7 @@ If you really want it now feel free to add it in yourself then make sure to do a
 ### Clean
 If you would like to remove all dead proxies from the file use the `-clean true` flag.
 This will output a `clean-proxies.json` file once completed which you should use to replace the original `proxies.json` file.
-Keep in mind this will increase the speed of running the bot but will increase the speed by not wasting time on dead links in the future.
+Keep in mind this will decrease the speed of running the bot (quite significantly) but will increase the speed by not wasting time on dead links in the future.
 
 ### Update
 If you would like to update the proxy list with your own simply replace the proxies replace the `proxies.json` file with your own JSON array of strings.
